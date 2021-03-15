@@ -63,7 +63,8 @@ def show_pokemon(request, pokemon_id):
     for pokemon_entity in pokemon_entities:
         pokemon = {
             'title_ru': requested_pokemon.title,
-            'img_url': request.build_absolute_uri(requested_pokemon.picture.url)
+            'img_url': request.build_absolute_uri(requested_pokemon.picture.url),
+            'description': requested_pokemon.description
         }
         add_pokemon(
             folium_map, pokemon_entity.latitude, pokemon_entity.longitude, pokemon['img_url'])
