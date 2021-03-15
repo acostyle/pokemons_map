@@ -4,6 +4,8 @@ class Pokemon(models.Model):
     title = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='pokemon_pic', null=True, blank=True)
 
+    description = models.CharField(max_length=200)
+
 
     def __str__(self):
         return self.title
