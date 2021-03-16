@@ -4,10 +4,10 @@ class Pokemon(models.Model):
     title = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='pokemon_pic', null=True, blank=True)
 
-    description = models.CharField(max_length=2000)
+    description = models.CharField(max_length=2000, blank=True)
 
-    title_en = models.CharField(max_length=200, default='Title en')
-    title_jp = models.CharField(max_length=200, default='Title jp')
+    title_en = models.CharField(max_length=200, blank=True)
+    title_jp = models.CharField(max_length=200, blank=True)
 
 
     def __str__(self):
