@@ -7,88 +7,112 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pokemon_entities', '0011_auto_20210316_1333'),
+        ("pokemon_entities", "0011_auto_20210316_1333"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pokemon',
-            name='description',
-            field=models.CharField(blank=True, max_length=2000, verbose_name='описание'),
+            model_name="pokemon",
+            name="description",
+            field=models.CharField(
+                blank=True, max_length=2000, verbose_name="описание"
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemon',
-            name='picture',
-            field=models.ImageField(blank=True, null=True, upload_to='pokemon_pic', verbose_name='изображение'),
+            model_name="pokemon",
+            name="picture",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="pokemon_pic",
+                verbose_name="изображение",
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemon',
-            name='previous_evolution',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='next_evolution', to='pokemon_entities.pokemon', verbose_name='из кого эволюционирует'),
+            model_name="pokemon",
+            name="previous_evolution",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="next_evolution",
+                to="pokemon_entities.pokemon",
+                verbose_name="из кого эволюционирует",
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemon',
-            name='title',
-            field=models.CharField(max_length=200, verbose_name='имя покемона'),
+            model_name="pokemon",
+            name="title",
+            field=models.CharField(max_length=200, verbose_name="имя покемона"),
         ),
         migrations.AlterField(
-            model_name='pokemon',
-            name='title_en',
-            field=models.CharField(blank=True, max_length=200, verbose_name='английское имя покемона'),
+            model_name="pokemon",
+            name="title_en",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="английское имя покемона"
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemon',
-            name='title_jp',
-            field=models.CharField(blank=True, max_length=200, verbose_name='японское имя покемона'),
+            model_name="pokemon",
+            name="title_jp",
+            field=models.CharField(
+                blank=True, max_length=200, verbose_name="японское имя покемона"
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='appeared_at',
-            field=models.DateField(blank=True, null=True, verbose_name='появился'),
+            model_name="pokemonentity",
+            name="appeared_at",
+            field=models.DateField(blank=True, null=True, verbose_name="появился"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='defence',
-            field=models.IntegerField(blank=True, null=True, verbose_name='защита'),
+            model_name="pokemonentity",
+            name="defence",
+            field=models.IntegerField(blank=True, null=True, verbose_name="защита"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='disappeared_at',
-            field=models.DateField(blank=True, null=True, verbose_name='исчез'),
+            model_name="pokemonentity",
+            name="disappeared_at",
+            field=models.DateField(blank=True, null=True, verbose_name="исчез"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='health',
-            field=models.IntegerField(blank=True, null=True, verbose_name='жизнь'),
+            model_name="pokemonentity",
+            name="health",
+            field=models.IntegerField(blank=True, null=True, verbose_name="жизнь"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='latitude',
-            field=models.FloatField(verbose_name='широта'),
+            model_name="pokemonentity",
+            name="latitude",
+            field=models.FloatField(verbose_name="широта"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='level',
-            field=models.IntegerField(blank=True, null=True, verbose_name='уровень'),
+            model_name="pokemonentity",
+            name="level",
+            field=models.IntegerField(blank=True, null=True, verbose_name="уровень"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='longitude',
-            field=models.FloatField(verbose_name='долгота'),
+            model_name="pokemonentity",
+            name="longitude",
+            field=models.FloatField(verbose_name="долгота"),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='pokemon',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pokemon_entities.pokemon', verbose_name='имя покемона'),
+            model_name="pokemonentity",
+            name="pokemon",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="pokemon_entities.pokemon",
+                verbose_name="имя покемона",
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='stamina',
-            field=models.IntegerField(blank=True, null=True, verbose_name='выносливость'),
+            model_name="pokemonentity",
+            name="stamina",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="выносливость"
+            ),
         ),
         migrations.AlterField(
-            model_name='pokemonentity',
-            name='strength',
-            field=models.IntegerField(blank=True, null=True, verbose_name='сила'),
+            model_name="pokemonentity",
+            name="strength",
+            field=models.IntegerField(blank=True, null=True, verbose_name="сила"),
         ),
     ]
