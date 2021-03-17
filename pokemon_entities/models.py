@@ -9,7 +9,7 @@ class Pokemon(models.Model):
         upload_to="pokemon_pic", null=True, blank=True, verbose_name="изображение"
     )
 
-    description = models.CharField(max_length=2000, blank=True, verbose_name="описание")
+    description = models.TextField(blank=True, verbose_name="описание")
 
     title_en = models.CharField(
         max_length=200, blank=True, verbose_name="английское имя покемона"
