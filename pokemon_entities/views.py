@@ -2,7 +2,7 @@ import folium
 import json
 
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import PokemonEntity, Pokemon
 
@@ -28,17 +28,16 @@ def show_all_pokemons(request):
     pokemon_entities = PokemonEntity.objects.all()
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    for pokemon in pokemons:
-        for pokemon_entity in pokemon_entities:
+    for pokemon_entity in pokemon_entities:
             add_pokemon(
                 folium_map,
                 pokemon_entity.latitude,
                 pokemon_entity.longitude,
-                request.build_absolute_uri(pokemon.picture.url),
+                request.build_absolute_uri(pokemon_entity.pokemon.picture.url),
             )
 
     pokemons_on_page = []
-    for pokemon in Pokemon.objects.all():
+    for pokemon in pokemons:
         pokemons_on_page.append(
             {
                 "pokemon_id": pokemon.id,
@@ -58,32 +57,30 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    pokemons = Pokemon.objects.all()
+    try:
+        pokemon = Pokemon.objects.get(id=pokemon_id)
+    except Pokemon.DoesNotExist:
+        return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
 
-    for pokemon in pokemons:
-        if pokemon.id == int(pokemon_id):
-            requested_pokemon = pokemon
-            break
-    else:
-        return HttpResponseNotFound("<h1>Такой покемон не найден</h1>")
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    pokemon_entities = PokemonEntity.objects.filter(pokemon__id=requested_pokemon.id)
-
+    
+    pokemon_entities = PokemonEntity.objects.filter(pokemon__id=pokemon.id)
     for pokemon_entity in pokemon_entities:
-        pokemon_characteristics = {
-            "title_ru": requested_pokemon.title,
-            "title_en": requested_pokemon.title_en,
-            "title_jp": requested_pokemon.title_jp,
-            "img_url": request.build_absolute_uri(requested_pokemon.picture.url),
-            "description": requested_pokemon.description,
-        }
         add_pokemon(
             folium_map,
             pokemon_entity.latitude,
             pokemon_entity.longitude,
-            pokemon_characteristics["img_url"],
+            request.build_absolute_uri(pokemon_entity.pokemon.picture.url),
         )
+
+    pokemon_characteristics = {
+            "title_ru": pokemon.title,
+            "title_en": pokemon.title_en,
+            "title_jp": pokemon.title_jp,
+            "img_url": request.build_absolute_uri(pokemon.picture.url),
+            "description": pokemon.description,
+        }
 
     if pokemon.previous_evolution:
         pokemon_characteristics["previous_evolution"] = {
